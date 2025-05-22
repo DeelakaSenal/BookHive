@@ -1,15 +1,18 @@
 .footer {
-  background-color: var(--bg-secondary);
-  border-top: 1px solid var(--border-color);
+  background-color: rgba(var(--bg-secondary-rgb), 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.1);
+  border-top: 1px solid rgba(var(--border-color-rgb), 0.1);
   padding: 3rem 0 1.5rem;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .container {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 2rem;
 }
 
 .footer-content {
@@ -28,20 +31,25 @@
 .footer-logo {
   display: flex;
   align-items: center;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .footer-logo-text {
-  font-family: 'Poppins', sans-serif;
-  font-size: 1.25rem;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
   font-weight: 700;
-  color: var(--primary-600);
+  background: linear-gradient(135deg, var(--primary-600), var(--primary-400));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
 }
 
 .footer-tagline {
   color: var(--text-tertiary);
   font-size: 0.875rem;
   margin: 0;
+  line-height: 1.5;
 }
 
 .footer-links {
@@ -59,6 +67,19 @@
   font-weight: 600;
   margin-bottom: 1rem;
   font-size: 1rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-600), var(--primary-400));
+    border-radius: 2px;
+  }
 }
 
 .footer-nav {
@@ -67,17 +88,20 @@
   margin: 0;
 
   li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
   }
 
   a {
     color: var(--text-tertiary);
     text-decoration: none;
-    transition: color 0.2s ease;
+    transition: all 0.2s ease;
     font-size: 0.875rem;
+    display: inline-flex;
+    align-items: center;
 
     &:hover {
       color: var(--primary-600);
+      transform: translateX(5px);
     }
   }
 }
@@ -94,15 +118,15 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background-color: var(--bg-tertiary);
-  color: var(--text-secondary);
-  transition: all 0.2s ease;
+  background-color: rgba(var(--primary-600-rgb), 0.1);
+  color: var(--primary-600);
+  transition: all 0.3s ease;
   text-decoration: none;
 
   &:hover {
     background-color: var(--primary-600);
     color: white;
-    transform: translateY(-3px);
+    transform: translateY(-3px) rotate(8deg);
   }
 
   fa-icon {
@@ -115,7 +139,7 @@
   display: flex;
   justify-content: space-between;
   padding-top: 1.5rem;
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid rgba(var(--border-color-rgb), 0.1);
   font-size: 0.875rem;
   color: var(--text-tertiary);
 }
@@ -126,6 +150,10 @@
 }
 
 @media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+
   .footer-content {
     flex-direction: column;
   }

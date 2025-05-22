@@ -20,7 +20,7 @@ import { BookService } from '../../services/book.service';
           <input
             type="text"
             class="search-input"
-            placeholder="Search books..."
+            placeholder="Search by title, author, or genre..."
             [(ngModel)]="searchTerm"
             (ngModelChange)="onSearch()"
           />
@@ -28,6 +28,7 @@ import { BookService } from '../../services/book.service';
             *ngIf="searchTerm"
             class="search-clear"
             (click)="clearSearch()"
+            aria-label="Clear search"
           >
             ✕
           </button>
@@ -117,14 +118,6 @@ import { BookService } from '../../services/book.service';
           </div>
         </div>
       </div>
-
-      <button
-        routerLink="/books/new"
-        class="add-book-fab"
-        aria-label="Add new book"
-      >
-        +
-      </button>
 
       <!-- Delete Confirmation Modal -->
       <div *ngIf="showDeleteModal" class="modal-backdrop">
