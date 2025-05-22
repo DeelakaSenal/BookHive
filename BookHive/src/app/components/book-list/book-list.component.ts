@@ -22,7 +22,7 @@ import { BookService } from '../../services/book.service';
             class="search-input"
             placeholder="Search by title, author, or genre..."
             [(ngModel)]="searchTerm"
-            (ngModelChange)="onSearch()"
+            (ngModelChange)="applyFilters()"
           />
           <button
             *ngIf="searchTerm"
@@ -119,6 +119,24 @@ import { BookService } from '../../services/book.service';
         </div>
       </div>
 
+      <!-- Floating Action Button -->
+      <a routerLink="/books/new" class="fab-button" aria-label="Add new book">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+      </a>
+
       <!-- Delete Confirmation Modal -->
       <div *ngIf="showDeleteModal" class="modal-backdrop">
         <div class="modal">
@@ -160,11 +178,17 @@ export class BookListComponent implements OnInit {
 
   loadBooks(): void {
     this.loading = true;
-    this.bookService.getBooks().subscribe((books) => {
-      this.books = books;
-      this.extractGenres();
-      this.applyFilters();
-      this.loading = false;
+    this.bookService.getBooks().subscribe({
+      next: (books) => {
+        this.books = books;
+        this.extractGenres();
+        this.applyFilters();
+        this.loading = false;
+      },
+      error: (error) => {
+        console.error('Error loading books:', error);
+        this.loading = false;
+      },
     });
   }
 
@@ -176,10 +200,6 @@ export class BookListComponent implements OnInit {
       }
     });
     this.genres = Array.from(genreSet).sort();
-  }
-
-  onSearch(): void {
-    this.applyFilters();
   }
 
   clearSearch(): void {
