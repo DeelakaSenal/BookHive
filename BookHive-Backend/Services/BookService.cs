@@ -1,3 +1,4 @@
+// BookHive-Backend/Services/BookService.cs
 using BookHive_Backend.Models;
 
 namespace BookHive_Backend.Services
@@ -55,6 +56,35 @@ namespace BookHive_Backend.Services
 
             _books.Remove(book);
             return true;
+        }
+
+        // New method: Get the latest 5 books (sorted by PublicationDate or Id)
+        public List<Book> GetLatestBooks()
+        {
+            return _books
+                .OrderByDescending(b => b.PublicationDate)
+                .ThenByDescending(b => b.Id)
+                .Take(5)
+                .ToList();
+        }
+
+        // New method: Get the oldest 10 books (sorted by PublicationDate or Id)
+        public List<Book> GetOldestBooks()
+        {
+            return _books
+                .OrderBy(b => b.PublicationDate)
+                .ThenBy(b => b.Id)
+                .Take(10)
+                .ToList();
+        }
+
+        // New method: Get books grouped by author
+        public List<object> GetBooksByAuthor()
+        {
+            return _books
+                .GroupBy(b => b.Author)
+                .Select(g => new { Author = g.Key, NoOfBooks = g.Count() })
+                .ToList<object>();
         }
     }
 }

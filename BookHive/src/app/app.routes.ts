@@ -1,3 +1,4 @@
+// src/app/app.routes.ts
 import { Routes } from '@angular/router';
 
 export const APP_ROUTES: Routes = [
@@ -6,6 +7,13 @@ export const APP_ROUTES: Routes = [
     loadComponent: () =>
       import('./components/book-list/book-list.component').then(
         (m) => m.BookListComponent
+      ),
+  },
+  {
+    path: 'dashboard',
+    loadComponent: () =>
+      import('./components/welcome-dashboard/welcome-dashboard.component').then(
+        (m) => m.WelcomeDashboardComponent
       ),
   },
   {

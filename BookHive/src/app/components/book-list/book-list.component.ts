@@ -241,8 +241,8 @@ export class BookListComponent implements OnInit {
             new Date(b.publicationDate).getTime();
           break;
         case 'rating':
-          const ratingA = a.rating || 0;
-          const ratingB = b.rating || 0;
+          const ratingA = a['rating'] || 0;
+          const ratingB = b['rating'] || 0;
           comparison = ratingA - ratingB;
           break;
       }
